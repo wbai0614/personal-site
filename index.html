@@ -1,0 +1,356 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>William Bai — Data / ML / BI Portfolio</title>
+  <meta name="description" content="Portfolio of William Bai — Data Science • ML Engineering • BI & Cloud. Projects, experience, and ways to get in touch." />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="William Bai — Portfolio" />
+  <meta property="og:description" content="Projects in ML, BI dashboards, and cloud deployments." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://personal-site-xqsvibyj4a-uc.a.run.app" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { ink: { 950: "#0b1220", 900: "#0f172a" } },
+          borderRadius: { '2xl': '1rem', '3xl': '1.5rem' }
+        }
+      }
+    }
+  </script>
+
+  <!-- React / ReactDOM (UMD) -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <!-- Minimal animations + smooth scroll -->
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in { opacity: 0; transform: translateY(8px); animation: fade 500ms ease-out forwards; }
+    .fade-in-2 { animation-delay: .1s; }
+    .fade-in-3 { animation-delay: .2s; }
+    @keyframes fade { to { opacity: 1; transform: translateY(0); } }
+    html, body { background: #0b1220; }
+  </style>
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "William Bai",
+    "jobTitle": "Data / ML Engineer",
+    "email": "mailto:wbai0614@gmail.com",
+    "url": "https://personal-site-xqsvibyj4a-uc.a.run.app",
+    "sameAs": [
+      "https://www.linkedin.com/in/wbai0614",
+      "https://github.com/wbai0614"
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: WebSite -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "William Bai — Portfolio",
+    "url": "https://personal-site-xqsvibyj4a-uc.a.run.app"
+  }
+  </script>
+</head>
+<body class="min-h-screen text-slate-100">
+  <div id="root"></div>
+
+  <script>
+    const { useState } = React;
+
+    // === personalize here ===
+    const NAME = "William Bai";
+    const TAGLINE = "Data Science • ML Engineering • BI & Cloud";
+    const LOCATION = "New York, USA";
+    const EMAIL = "wbai0614@gmail.com";
+    const LINKEDIN = "https://www.linkedin.com/in/wbai0614";
+    const GITHUB = "https://github.com/wbai0614";
+    const IRIS_APP_URL = "#";
+    const RESUME_URL = "#";
+
+    const PROJECTS = [
+      {
+        title: "Iris ML Flask API",
+        description: "Productionized a scikit-learn classifier with Docker & Cloud Run; REST endpoints + CI-friendly structure.",
+        tags: ["Flask","Docker","Cloud Run","scikit-learn"],
+        links: [{ label: "Live", href: IRIS_APP_URL }, { label: "Source", href: `${GITHUB}/iris-ml-flask` }],
+        icon: "🧪"
+      },
+      {
+        title: "Customer Intelligence Dashboard",
+        description: "Sales analytics pipeline: cleaning, RFM clustering, churn prediction, and Power BI dashboards.",
+        tags: ["Python","Pandas","Power BI","RFM","ML"],
+        links: [{ label: "Case Study", href: "#work" }],
+        icon: "📊"
+      },
+      {
+        title: "MLOps Starter Kit",
+        description: "Template repo with reproducible envs, linting/formatting, and Docker images ready for CI/CD.",
+        tags: ["MLOps","Docker","Poetry/pip","CI/CD"],
+        links: [{ label: "Source", href: `${GITHUB}/mlops-starter` }],
+        icon: "⚙️"
+      }
+    ];
+
+    function Chip({ children }) {
+      return React.createElement("span", { className: "text-xs text-white/70 rounded-full border border-white/10 px-3 py-1" }, children);
+    }
+
+    function SectionTitle({ children }) {
+      return React.createElement("h2", { className: "text-2xl md:text-3xl font-bold tracking-tight" }, children);
+    }
+
+    function Nav() {
+      const [open, setOpen] = useState(false);
+      const nav = [
+        { label: "About", href: "#about" },
+        { label: "Projects", href: "#projects" },
+        { label: "Work", href: "#work" },
+        { label: "Skills", href: "#skills" },
+        { label: "Contact", href: "#contact" }
+      ];
+      return React.createElement(
+        "header",
+        { className: "sticky top-0 z-40 backdrop-blur bg-ink-950/60 border-b border-white/10" },
+        React.createElement("div", { className: "mx-auto max-w-6xl px-4 py-3 flex items-center justify-between" },
+          React.createElement("a", { href: "#", className: "font-semibold tracking-tight" }, NAME),
+          React.createElement("nav", { className: "hidden md:flex gap-6 text-sm" },
+            nav.map(n => React.createElement("a", { key: n.href, href: n.href, className: "hover:text-white/90 text-white/70" }, n.label))
+          ),
+          React.createElement("button", { className: "md:hidden rounded-xl border border-white/10 px-3 py-2 text-sm", onClick: () => setOpen(v => !v), "aria-label": "Toggle menu" }, "Menu")
+        ),
+        open && React.createElement("div", { className: "md:hidden border-t border-white/10" },
+          React.createElement("div", { className: "mx-auto max-w-6xl px-4 py-2 flex flex-col gap-2" },
+            ["#about","#projects","#work","#skills","#contact"].map(href =>
+              React.createElement("a", { key: href, href, className: "py-2 text-white/80", onClick: () => setOpen(false) }, href.replace("#",""))
+            )
+          )
+        )
+      );
+    }
+
+    function Hero() {
+      return React.createElement("section", { className: "mx-auto max-w-6xl px-4 py-20 lg:py-28" },
+        React.createElement("div", { className: "grid lg:grid-cols-2 gap-10 lg:gap-16 items-center" },
+          React.createElement("div", { className: "fade-in" },
+            React.createElement("h1", { className: "text-4xl md:text-6xl font-extrabold leading-tight" }, `Hi, I'm ${NAME}`),
+            React.createElement("p", { className: "mt-3 text-lg md:text-xl text-white/70" }, TAGLINE),
+            React.createElement("p", { className: "mt-1 text-sm text-white/50" }, `Based in ${LOCATION}`),
+            React.createElement("div", { className: "mt-6 flex flex-wrap items-center gap-3" },
+              React.createElement("a", { href: "#projects", className: "inline-flex items-center gap-2 rounded-2xl bg-white text-slate-900 px-4 py-2 text-sm font-semibold hover:bg-white/90" }, "View Projects →"),
+              React.createElement("a", { href: RESUME_URL, className: "inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2 text-sm hover:border-white/40" }, "Resume ↗"),
+              React.createElement("a", { href: IRIS_APP_URL, className: "inline-flex items-center gap-2 rounded-2xl border border-emerald-500/40 text-emerald-300 px-4 py-2 text-sm hover:border-emerald-400/70" }, "Live Demo ↗")
+            ),
+            React.createElement("div", { className: "mt-6 flex items-center gap-4 text-white/70" },
+              React.createElement("a", { href: `mailto:${EMAIL}`, className: "hover:text-white" }, "Email"),
+              React.createElement("a", { href: LINKEDIN, className: "hover:text-white" }, "LinkedIn"),
+              React.createElement("a", { href: GITHUB, className: "hover:text-white" }, "GitHub")
+            )
+          ),
+          React.createElement("div", { className: "fade-in fade-in-2 relative" },
+            React.createElement("div", { className: "aspect-[4/3] w-full rounded-3xl border border-white/10 bg-gradient-to-br from-ink-900 to-slate-900 p-1" },
+              React.createElement("div", { className: "h-full w-full rounded-2xl bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-emerald-500/10 via-sky-500/10 to-purple-500/10 flex items-center justify-center" },
+                React.createElement("div", { className: "text-center px-6" },
+                  React.createElement("h3", { className: "font-semibold text-lg text-white/90" }, "Building data products that ship"),
+                  React.createElement("p", { className: "mt-2 text-white/60 text-sm" }, "Clean pipelines • Useful dashboards • Deployed models")
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+
+    function Projects() {
+      return React.createElement("section", { id: "projects", className: "mx-auto max-w-6xl px-4 py-16" },
+        React.createElement(SectionTitle, null, "Featured Projects"),
+        React.createElement("p", { className: "text-white/60 mt-2" }, "A few things I've shipped and iterated on."),
+        React.createElement("div", { className: "mt-8 grid md:grid-cols-2 gap-6" },
+          PROJECTS.map(p =>
+            React.createElement("div", { key: p.title, className: "fade-in rounded-3xl border border-white/10 bg-slate-900/50 p-5 hover:border-white/20" },
+              React.createElement("div", { className: "flex items-center gap-3" },
+                React.createElement("div", { className: "rounded-2xl bg-white/5 px-3 py-2 text-lg" }, p.icon),
+                React.createElement("h3", { className: "font-semibold text-lg" }, p.title)
+              ),
+              React.createElement("p", { className: "mt-3 text-white/70 text-sm leading-relaxed" }, p.description),
+              React.createElement("div", { className: "mt-4 flex flex-wrap gap-2" }, p.tags.map(t => React.createElement(Chip, { key: t }, t))),
+              React.createElement("div", { className: "mt-4 flex flex-wrap gap-3" }, p.links.map(l => React.createElement("a", { key: l.href, href: l.href, className: "inline-flex items-center gap-2 text-sm text-emerald-300 hover:text-emerald-200" }, l.label, " ↗")))
+            )
+          )
+        )
+      );
+    }
+
+    function Work() {
+      return React.createElement("section", { id: "work", className: "mx-auto max-w-6xl px-4 py-16" },
+        React.createElement(SectionTitle, null, "Experience"),
+        React.createElement("div", { className: "mt-6 grid gap-4" },
+          React.createElement("div", { className: "rounded-3xl border border-white/10 p-5 bg-slate-900/50" },
+            React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" },
+              React.createElement("div", null,
+                React.createElement("h3", { className: "font-semibold" }, "PINGPOD Inc. — Sales Growth Specialist (Data)"),
+                React.createElement("p", { className: "text-white/60 text-sm" }, `Sep 2024 – Present • ${LOCATION}`)
+              ),
+              React.createElement("div", { className: "text-xs text-white/60" }, "AWS, Tableau, Redshift")
+            ),
+            React.createElement("ul", { className: "list-disc pl-5 mt-3 space-y-2 text-white/80 text-sm" },
+              React.createElement("li", null, "Built scalable data pipelines; reduced processing time by 30% enabling near-real-time insights."),
+              React.createElement("li", null, "Shipped dashboards for booking trends & ratings across 20+ locations."),
+              React.createElement("li", null, "Identified high-cancellation cohorts; targeted promos increased morning bookings.")
+            )
+          ),
+          React.createElement("div", { className: "rounded-3xl border border-white/10 p-5 bg-slate-900/50" },
+            React.createElement("div", { className: "flex items-center justify-between flex-wrap gap-2" },
+              React.createElement("div", null,
+                React.createElement("h3", { className: "font-semibold" }, "Edusynth.org — Sales Data Analyst Intern (Paid)"),
+                React.createElement("p", { className: "text-white/60 text-sm" }, "Jun 2024 – Dec 2024 • Remote")
+              ),
+              React.createElement("div", { className: "text-xs text-white/60" }, "Python, Automation")
+            ),
+            React.createElement("ul", { className: "list-disc pl-5 mt-3 space-y-2 text-white/80 text-sm" },
+              React.createElement("li", null, "Automated pipeline cut manual analysis time by 60% with scheduling & validations."),
+              React.createElement("li", null, "Developed churn & sentiment features for stakeholders.")
+            )
+          )
+        )
+      );
+    }
+
+    function Skills() {
+      const groups = [
+        ["Data & ML",["Python","Pandas","NumPy","scikit-learn","SVM/Tree/LogReg","K-Means","XGBoost","NLP","EDA"]],
+        ["Analytics & BI",["SQL","Power BI (DAX)","Tableau","A/B Testing","Forecasting"]],
+        ["Data Platform",["AWS (S3/Glue/Redshift)","GCP (Cloud Run)","Docker","Git/GitHub"]],
+        ["DataOps",["Airflow (concepts)","dbt (basics)","Testing","Observability"]]
+      ];
+      return React.createElement("section", { id: "skills", className: "mx-auto max-w-6xl px-4 py-16" },
+        React.createElement(SectionTitle, null, "Skills"),
+        React.createElement("div", { className: "mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4" },
+          groups.map(([title, items]) =>
+            React.createElement("div", { key: title, className: "rounded-3xl border border-white/10 bg-slate-900/50 p-5" },
+              React.createElement("div", { className: "flex items-center gap-2 text-white/80" }, "✨", React.createElement("h3", { className: "font-semibold" }, title)),
+              React.createElement("div", { className: "mt-3 flex flex-wrap gap-2" }, items.map(i => React.createElement(Chip, { key: i }, i)))
+            )
+          )
+        )
+      );
+    }
+
+    function About() {
+      return React.createElement("section", { id: "about", className: "mx-auto max-w-6xl px-4 py-16" },
+        React.createElement(SectionTitle, null, "About"),
+        React.createElement("div", { className: "mt-4 grid lg:grid-cols-3 gap-6" },
+          React.createElement("div", { className: "lg:col-span-2 rounded-3xl border border-white/10 bg-slate-900/50 p-5 leading-relaxed text-white/80" },
+            "I'm a data practitioner who loves shipping. I build ML APIs, BI dashboards people actually use, and wrangle messy data into trustworthy pipelines."
+          ),
+          React.createElement("div", { className: "rounded-3xl border border-white/10 bg-slate-900/50 p-5 text-white/80" },
+            React.createElement("p", { className: "font-semibold" }, "Currently exploring"),
+            React.createElement("ul", { className: "list-disc pl-5 mt-2 space-y-1 text-sm" },
+              React.createElement("li", null, "LLM-assisted analytics & prompt safety"),
+              React.createElement("li", null, "Lightweight MLOps with Docker/GitHub Actions"),
+              React.createElement("li", null, "Customer segmentation with RFM + behavior features")
+            )
+          )
+        )
+      );
+    }
+
+    function Contact() {
+      return React.createElement("section", { id: "contact", className: "mx-auto max-w-6xl px-4 py-16" },
+        React.createElement(SectionTitle, null, "Contact"),
+        React.createElement("p", { className: "text-white/70 mt-2 max-w-2xl" }, "Want to collaborate or ship a dashboard/ML feature? Drop a line."),
+        React.createElement("div", { className: "mt-6 grid md:grid-cols-2 gap-6" },
+          // --- Formspree (no JS fetch) ---
+          React.createElement("form", {
+            action: "https://formspree.io/f/mgvldaqg",
+            method: "POST",
+            className: "rounded-3xl border border-white/10 bg-slate-900/50 p-5 space-y-3",
+            noValidate: true
+          },
+            React.createElement("input", { name: "name", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none", placeholder: "Your name" }),
+            React.createElement("input", { type: "email", name: "email", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none", placeholder: "Your email" }),
+            React.createElement("textarea", { name: "message", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none min-h-[120px]", placeholder: "Your message" }),
+            // honeypot
+            React.createElement("input", { type: "text", name: "_gotcha", style: { display: "none" }, tabIndex: -1, autoComplete: "off" }),
+            // redirect to /thank-you.html (value set by script below)
+            React.createElement("input", { type: "hidden", name: "_redirect", id: "fs-redirect", value: "" }),
+            React.createElement("button", { className: "rounded-2xl bg-white text-slate-900 px-4 py-2 text-sm font-semibold hover:bg-white/90" }, "Send"),
+            React.createElement("p", { className: "text-sm text-white/70" }, "You’ll get a confirmation from Formspree.")
+          ),
+          React.createElement("div", { className: "rounded-3xl border border-white/10 bg-slate-900/50 p-5" },
+            React.createElement("p", { className: "text-white/80" }, "Prefer email? Reach me at"),
+            React.createElement("a", { href: `mailto:${EMAIL}`, className: "inline-flex items-center gap-2 mt-2 text-emerald-300 hover:text-emerald-200" }, "✉️ ", EMAIL),
+            React.createElement("div", { className: "mt-4 flex items-center gap-4 text-white/70" },
+              React.createElement("a", { href: LINKEDIN, className: "hover:text-white" }, "LinkedIn"),
+              React.createElement("a", { href: GITHUB, className: "hover:text-white" }, "GitHub")
+            )
+          )
+        )
+      );
+    }
+
+    function Footer() {
+      return React.createElement("footer", { className: "border-top border-white/10" },
+        React.createElement("div", { className: "mx-auto max-w-6xl px-4 py-8 text-sm text-white/60 flex items-center justify-between flex-wrap gap-2" },
+          React.createElement("p", null, `© ${new Date().getFullYear()} ${NAME}. All rights reserved.`),
+          React.createElement("div", { className: "flex items-center gap-4" },
+            React.createElement("a", { href: "#", className: "hover:text-white" }, "Top"),
+            React.createElement("a", { href: RESUME_URL, className: "hover:text-white" }, "Resume"),
+            React.createElement("a", { href: "#projects", className: "hover:text-white" }, "Projects")
+          )
+        )
+      );
+    }
+
+    function App() {
+      return React.createElement(
+        "div",
+        { className: "min-h-screen bg-gradient-to-b from-ink-950 via-ink-900 to-ink-950 text-slate-100" },
+        React.createElement(Nav, null),
+        React.createElement(Hero, null),
+        React.createElement(Projects, null),
+        React.createElement(Work, null),
+        React.createElement(Skills, null),
+        React.createElement(About, null),
+        React.createElement(Contact, null),
+        React.createElement(Footer, null)
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+  </script>
+
+  <!-- Auto-set Formspree redirect to an absolute URL: https://<your-site>/thank-you.html -->
+  <script>
+    (function () {
+      const form = document.querySelector('form[action^="https://formspree.io/f/"]');
+      const redirect = document.getElementById('fs-redirect');
+      if (form && redirect) {
+        form.addEventListener('submit', () => {
+          redirect.value = `${window.location.origin}/thank-you.html`;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
