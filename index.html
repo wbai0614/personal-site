@@ -282,8 +282,10 @@
         React.createElement("div", { className: "mt-6 grid md:grid-cols-2 gap-6" },
           // --- Formspree (no JS fetch) ---
           React.createElement("form", {
+            id: "contact-form",
             action: "https://formspree.io/f/mgvldaqg",
             method: "POST",
+            autocomplete: "off",
             className: "rounded-3xl border border-white/10 bg-slate-900/50 p-5 space-y-3",
             noValidate: true
           },
@@ -340,16 +342,23 @@
     ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
   </script>
 
-  <!-- Auto-set Formspree redirect to an absolute URL: https://<your-site>/thank-you.html -->
+  <!-- Option A: set redirect and reset form on submit; also reset on back/refresh (pageshow) -->
   <script>
     (function () {
-      const form = document.querySelector('form[action^="https://formspree.io/f/"]');
+      const form = document.getElementById('contact-form');
       const redirect = document.getElementById('fs-redirect');
-      if (form && redirect) {
-        form.addEventListener('submit', () => {
-          redirect.value = `${window.location.origin}/thank-you.html`;
-        });
-      }
+
+      // When submitting, set absolute redirect and clear fields
+      form?.addEventListener('submit', () => {
+        if (redirect) redirect.value = `${location.origin}/thank-you.html`;
+        // Allow native submit to proceed, then reset right after
+        setTimeout(() => form.reset(), 10);
+      });
+
+      // If user returns via Back/forward cache, ensure fields are blank
+      window.addEventListener('pageshow', () => {
+        form?.reset();
+      });
     })();
   </script>
 </body>
