@@ -86,7 +86,7 @@
     const LINKEDIN = "https://www.linkedin.com/in/wbai0614";
     const GITHUB = "https://github.com/wbai0614";
     const IRIS_APP_URL = "#";
-    const RESUME_URL = "#";
+    const RESUME_URL = "/assets/resume.pdf";   // updated
 
     const PROJECTS = [
       {
@@ -158,7 +158,8 @@
             React.createElement("p", { className: "mt-1 text-sm text-white/50" }, `Based in ${LOCATION}`),
             React.createElement("div", { className: "mt-6 flex flex-wrap items-center gap-3" },
               React.createElement("a", { href: "#projects", className: "inline-flex items-center gap-2 rounded-2xl bg-white text-slate-900 px-4 py-2 text-sm font-semibold hover:bg-white/90" }, "View Projects →"),
-              React.createElement("a", { href: RESUME_URL, className: "inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2 text-sm hover:border-white/40" }, "Resume ↗"),
+              React.createElement("a", { href: RESUME_URL, target: "_blank", rel: "noopener",
+                className: "inline-flex items-center gap-2 rounded-2xl border border-white/20 px-4 py-2 text-sm hover:border-white/40" }, "Resume ↗"),
               React.createElement("a", { href: IRIS_APP_URL, className: "inline-flex items-center gap-2 rounded-2xl border border-emerald-500/40 text-emerald-300 px-4 py-2 text-sm hover:border-emerald-400/70" }, "Live Demo ↗")
             ),
             React.createElement("div", { className: "mt-6 flex items-center gap-4 text-white/70" },
@@ -317,7 +318,7 @@
           React.createElement("p", null, `© ${new Date().getFullYear()} ${NAME}. All rights reserved.`),
           React.createElement("div", { className: "flex items-center gap-4" },
             React.createElement("a", { href: "#", className: "hover:text-white" }, "Top"),
-            React.createElement("a", { href: RESUME_URL, className: "hover:text-white" }, "Resume"),
+            React.createElement("a", { href: RESUME_URL, target: "_blank", rel: "noopener", className: "hover:text-white" }, "Resume"),
             React.createElement("a", { href: "#projects", className: "hover:text-white" }, "Projects")
           )
         )
