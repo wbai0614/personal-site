@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://personal-site-xqsvibyj4a-uc.a.run.app/sitemap.xml
+Sitemap: https://www.williambai.dev/sitemap.xml

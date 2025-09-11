@@ -8,7 +8,7 @@ Thumbs.db
 *.swp
 *.swo
 
-# Node
+# Node (if you add tooling later)
 node_modules
 npm-debug.log*
 yarn.lock

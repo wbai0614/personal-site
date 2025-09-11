@@ -7,11 +7,14 @@
   <meta name="description" content="Portfolio of William Bai — Data Science • ML Engineering • BI & Cloud. Projects, experience, and ways to get in touch." />
   <meta name="theme-color" content="#0b1220" />
 
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.williambai.dev/" />
+
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="William Bai — Portfolio" />
   <meta property="og:description" content="Projects in ML, BI dashboards, and cloud deployments." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://personal-site-xqsvibyj4a-uc.a.run.app" />
+  <meta property="og:url" content="https://www.williambai.dev" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
@@ -54,7 +57,7 @@
     "name": "William Bai",
     "jobTitle": "Data / ML Engineer",
     "email": "mailto:wbai0614@gmail.com",
-    "url": "https://personal-site-xqsvibyj4a-uc.a.run.app",
+    "url": "https://www.williambai.dev",
     "sameAs": [
       "https://www.linkedin.com/in/wbai0614",
       "https://github.com/wbai0614"
@@ -68,7 +71,7 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "William Bai — Portfolio",
-    "url": "https://personal-site-xqsvibyj4a-uc.a.run.app"
+    "url": "https://www.williambai.dev"
   }
   </script>
 </head>
@@ -85,8 +88,8 @@
     const EMAIL = "wbai0614@gmail.com";
     const LINKEDIN = "https://www.linkedin.com/in/wbai0614";
     const GITHUB = "https://github.com/wbai0614";
-    const IRIS_APP_URL = "demo/iris.html";
-    const RESUME_URL = "/assets/resume.pdf";   // updated
+    const IRIS_APP_URL = "/demo/iris.html";     // Live Demo points to in-browser page
+    const RESUME_URL = "/assets/resume.pdf";    // Make sure your PDF is placed there
 
     const PROJECTS = [
       {
@@ -281,7 +284,6 @@
         React.createElement(SectionTitle, null, "Contact"),
         React.createElement("p", { className: "text-white/70 mt-2 max-w-2xl" }, "Want to collaborate or ship a dashboard/ML feature? Drop a line."),
         React.createElement("div", { className: "mt-6 grid md:grid-cols-2 gap-6" },
-          // --- Formspree (no JS fetch) ---
           React.createElement("form", {
             id: "contact-form",
             action: "https://formspree.io/f/mgvldaqg",
@@ -293,9 +295,7 @@
             React.createElement("input", { name: "name", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none", placeholder: "Your name" }),
             React.createElement("input", { type: "email", name: "email", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none", placeholder: "Your email" }),
             React.createElement("textarea", { name: "message", required: true, className: "w-full rounded-xl bg-slate-800/80 px-3 py-2 outline-none min-h-[120px]", placeholder: "Your message" }),
-            // honeypot
             React.createElement("input", { type: "text", name: "_gotcha", style: { display: "none" }, tabIndex: -1, autoComplete: "off" }),
-            // redirect to /thank-you.html (value set by script below)
             React.createElement("input", { type: "hidden", name: "_redirect", id: "fs-redirect", value: "" }),
             React.createElement("button", { className: "rounded-2xl bg-white text-slate-900 px-4 py-2 text-sm font-semibold hover:bg-white/90" }, "Send"),
             React.createElement("p", { className: "text-sm text-white/70" }, "You’ll get a confirmation from Formspree.")
@@ -349,17 +349,11 @@
       const form = document.getElementById('contact-form');
       const redirect = document.getElementById('fs-redirect');
 
-      // When submitting, set absolute redirect and clear fields
       form?.addEventListener('submit', () => {
         if (redirect) redirect.value = `${location.origin}/thank-you.html`;
-        // Allow native submit to proceed, then reset right after
         setTimeout(() => form.reset(), 10);
       });
-
-      // If user returns via Back/forward cache, ensure fields are blank
-      window.addEventListener('pageshow', () => {
-        form?.reset();
-      });
+      window.addEventListener('pageshow', () => { form?.reset(); });
     })();
   </script>
 </body>
