@@ -89,7 +89,10 @@
     const LINKEDIN = "https://www.linkedin.com/in/wbai0614";
     const GITHUB = "https://github.com/wbai0614";
     const IRIS_APP_URL = "/demo/iris.html";     // Live Demo points to in-browser page
-    const RESUME_URL = "/assets/resume.pdf";    // Make sure your PDF is placed there
+    const RESUME_URL = "/assets/resume.pdf";    // Ensure resume.pdf exists
+
+    // Customer Intelligence project links
+    const CUSTOMER_SOURCE_URL = "https://github.com/wbai0614/Capstone-William";
 
     const PROJECTS = [
       {
@@ -106,12 +109,15 @@
         links: [{ label: "Case Study", href: "#work" }],
         icon: "📊"
       },
+      // Updated: Only Source link (no Live button)
       {
-        title: "MLOps Starter Kit",
-        description: "Template repo with reproducible envs, linting/formatting, and Docker images ready for CI/CD.",
-        tags: ["MLOps","Docker","Poetry/pip","CI/CD"],
-        links: [{ label: "Source", href: `${GITHUB}/mlops-starter` }],
-        icon: "⚙️"
+        title: "Customer Intelligence ML API + Frontend",
+        description: "Flask ML API + HTML UI on Cloud Run to predict churn, sales value, and customer segments with trained models.",
+        tags: ["Flask","Cloud Run","Docker","LogReg","Decision Tree","SVM","Linear Reg","KMeans"],
+        links: [
+          { label: "Source", href: CUSTOMER_SOURCE_URL }
+        ],
+        icon: "🧠"
       }
     ];
 
@@ -198,7 +204,11 @@
               ),
               React.createElement("p", { className: "mt-3 text-white/70 text-sm leading-relaxed" }, p.description),
               React.createElement("div", { className: "mt-4 flex flex-wrap gap-2" }, p.tags.map(t => React.createElement(Chip, { key: t }, t))),
-              React.createElement("div", { className: "mt-4 flex flex-wrap gap-3" }, p.links.map(l => React.createElement("a", { key: l.href, href: l.href, className: "inline-flex items-center gap-2 text-sm text-emerald-300 hover:text-emerald-200" }, l.label, " ↗")))
+              React.createElement("div", { className: "mt-4 flex flex-wrap gap-3" },
+                (p.links || []).map(l =>
+                  React.createElement("a", { key: l.href, href: l.href, className: "inline-flex items-center gap-2 text-sm text-emerald-300 hover:text-emerald-200" }, l.label, " ↗")
+                )
+              )
             )
           )
         )
